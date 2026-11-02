@@ -4,146 +4,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon</title>
+    <title>Amazon Clone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="project1.css">
+    <link rel="stylesheet" href="project1.css?v=6.0">
 </head>
 
 <body>
     <header>
         <div class="navbar">
             <div class="nav-logo border">
-                <div class="logo">
-
-                </div>
+                <div class="logo"></div>
             </div>
-            <div class="nav-address  border">
+
+            <div class="nav-address border" id="nav-address-btn" title="Change Delivery Location">
                 <p class="p1">deliver in</p>
                 <div class="nav-icon">
                     <i class="fa-solid fa-location-dot"></i>
-                    <p class="p2">india</p>
+                    <p class="p2" id="nav-delivery-country">India</p>
                 </div>
             </div>
-            <div class="nav-search">
-                <select class="search-select">
-                    <option>All</option>
 
+            <div class="nav-search">
+                <select class="search-select" id="search-category">
+                    <option value="all">All</option>
                 </select>
-                <input placeholder="Search Amazon" class="search-input">
-                <div class="search-icon">
+                <input placeholder="Search Amazon" class="search-input" id="search-input">
+                <div class="search-icon" id="search-btn">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
-            <div class="nav-signin border">
-                <p><span>Hello, sign in </span></p>
+
+            <div class="nav-signin border" id="nav-signin-btn">
+                <p><span id="nav-signin-greeting">Hello, sign in</span></p>
                 <p class="p3">Account & lists</p>
             </div>
-            <div class="nav-return border">
-                <p><span>Returns </span></p>
+
+            <div class="nav-return border" id="nav-orders-btn">
+                <p><span>Returns</span></p>
                 <p class="p3">& orders</p>
             </div>
-            <div class="nav-card border">
-                <i class="fa-solid fa-cart-shopping"></i>
-                card
+
+            <div class="nav-card border" id="cart-btn">
+                <div class="cart-icon-wrapper">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </div>
+                cart
+            </div>
+
+            <!-- User Profile & Settings Logo Button -->
+            <div class="nav-user border" id="user-menu-btn" title="Your Profile, Themes & Settings">
+                <div class="user-avatar-badge" id="user-avatar-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+                <div class="user-nav-text">
+                    <span id="nav-user-greeting">Hello, Guest</span>
+                    <p class="p3">Account <i class="fa-solid fa-caret-down"></i></p>
+                </div>
+            </div>
+
+            <!-- User Dropdown Menu -->
+            <div class="user-dropdown" id="user-dropdown" style="display: none;">
+                <div class="user-dropdown-arrow"></div>
+                
+                <!-- Profile Header -->
+                <div class="user-profile-header">
+                    <div class="user-profile-avatar" id="dropdown-user-avatar">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div class="user-profile-details">
+                        <h4 id="user-display-name">Guest User</h4>
+                        <p id="user-display-status"><i class="fa-solid fa-crown" style="color: #febd68;"></i> Prime Member</p>
+                        <a href="#" id="edit-profile-btn" class="profile-action-link">Edit Profile</a>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- Theme Switcher Option -->
+                <div class="dropdown-section">
+                    <div class="dropdown-section-header">
+                        <span class="dropdown-section-title"><i class="fa-solid fa-palette"></i> Theme / Mode</span>
+                    </div>
+                    <div class="theme-toggle-container">
+                        <button class="theme-btn active" id="theme-light-btn" data-theme="light">
+                            <i class="fa-solid fa-sun"></i> Light
+                        </button>
+                        <button class="theme-btn" id="theme-dark-btn" data-theme="dark">
+                            <i class="fa-solid fa-moon"></i> Dark
+                        </button>
+                        <button class="theme-btn" id="theme-midnight-btn" data-theme="midnight">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Midnight
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- Settings & Preferences -->
+                <div class="dropdown-section">
+                    <span class="dropdown-section-title"><i class="fa-solid fa-sliders"></i> Preferences</span>
+                    
+                    <div class="setting-row">
+                        <label for="currency-select"><i class="fa-solid fa-coins"></i> Currency:</label>
+                        <select id="currency-select" class="dropdown-select">
+                            <option value="INR" selected>INR (₹)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <label for="country-select"><i class="fa-solid fa-earth-americas"></i> Deliver To:</label>
+                        <select id="country-select" class="dropdown-select">
+                            <option value="India" selected>India (IN)</option>
+                            <option value="United States">USA (US)</option>
+                            <option value="United Kingdom">UK (GB)</option>
+                            <option value="Germany">Germany (DE)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <label for="sound-toggle"><i class="fa-solid fa-volume-high"></i> Audio Sound:</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <label for="compact-toggle"><i class="fa-solid fa-table-cells-large"></i> Compact Grid:</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="compact-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- User Features Links -->
+                <div class="dropdown-section">
+                    <span class="dropdown-section-title"><i class="fa-solid fa-layer-group"></i> Quick Access</span>
+                    
+                    <a href="#" class="dropdown-menu-link" id="view-orders-btn">
+                        <i class="fa-solid fa-box-open"></i>
+                        <span>Your Orders</span>
+                        <span class="dropdown-badge" id="orders-count-badge">0</span>
+                    </a>
+
+                    <a href="#" class="dropdown-menu-link" id="view-wishlist-btn">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Your Wishlist</span>
+                        <span class="dropdown-badge" id="wishlist-count-badge">0</span>
+                    </a>
+
+                    <a href="#" class="dropdown-menu-link" id="view-settings-btn">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- Auth & Reset Buttons -->
+                <div class="dropdown-section dropdown-actions">
+                    <button class="btn-user-auth" id="user-auth-btn">
+                        <i class="fa-solid fa-right-to-bracket"></i> Sign In / Register
+                    </button>
+                    <button class="btn-reset-store" id="reset-store-btn" title="Reset all cart, orders & settings">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Store Data
+                    </button>
+                </div>
             </div>
 
         </div>
+
         <div class="panel">
-            <div class="panel-all">
+            <div class="panel-all" id="panel-all-btn" title="All Categories">
                 <i class="fa-solid fa-bars"></i>
                 All
             </div>
-            <div class="panel-option">
-                <a>Today's Deals</a>
-                <a>Registry</a>
-                <a>Customer Service</a>
-                <a>Gift Cards</a>
-                <a> Sell</a>
+            <div class="panel-option" id="panel-options-container">
+                <a href="#" class="panel-link active" data-category="home"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#" class="panel-link" data-category="deals"><i class="fa-solid fa-bolt"></i> Today's Deals</a>
+                <a href="#" class="panel-link" data-category="smartphones"><i class="fa-solid fa-mobile-screen"></i> Mobiles</a>
+                <a href="#" class="panel-link" data-category="laptops"><i class="fa-solid fa-laptop"></i> Laptops</a>
+                <a href="#" class="panel-link" data-category="electronics"><i class="fa-solid fa-headphones"></i> Electronics</a>
+                <a href="#" class="panel-link" data-category="fashion"><i class="fa-solid fa-shirt"></i> Fashion</a>
+                <a href="#" class="panel-link" data-category="beauty"><i class="fa-solid fa-wand-magic-sparkles"></i> Beauty</a>
+                <a href="#" class="panel-link" data-category="home-kitchen"><i class="fa-solid fa-kitchen-set"></i> Kitchen</a>
+                <a href="#" class="panel-link" data-category="books"><i class="fa-solid fa-book"></i> Books</a>
+                <a href="#" class="panel-link" data-category="toys"><i class="fa-solid fa-gamepad"></i> Toys & Games</a>
+                <a href="#" class="panel-link" data-category="furniture"><i class="fa-solid fa-couch"></i> Furniture</a>
+                <a href="#" class="panel-link" data-category="fragrances"><i class="fa-solid fa-spray-can-sparkles"></i> Fragrances</a>
+                <a href="#" class="panel-link" data-category="groceries"><i class="fa-solid fa-basket-shopping"></i> Groceries</a>
+                <a href="#" class="panel-link" data-category="customer-service"><i class="fa-solid fa-headset"></i> Customer Service</a>
+                <a href="#" class="panel-link" data-category="gift-cards"><i class="fa-solid fa-gift"></i> Gift Cards</a>
+                <a href="#" class="panel-link" data-category="sell"><i class="fa-solid fa-store"></i> Sell</a>
             </div>
-            <div class="panel-deals">
+            <div class="panel-deals" id="deals-btn" title="Shop Deal in Electronics">
                 shop deal in electronics
             </div>
         </div>
     </header>
-    <div class="hero-section">
+    
+    <!-- Hero Section with Automatic 5-Slide Carousel -->
+    <div class="hero-section" id="hero-slider-container">
+        <div class="hero-slides-wrapper" id="hero-slides-wrapper">
+            <!-- Slide 1: Mega Savings Days -->
+            <div class="hero-slide active" style="background-image: url('hero_image.jpg');">
+                <div class="hero-slide-content">
+                    <span class="hero-slide-badge"><i class="fa-solid fa-bolt"></i> Mega Savings Sale</span>
+                    <h1 class="hero-slide-title">Big Billion Savings Days</h1>
+                    <p class="hero-slide-desc">Save up to 50% on top tech, gadgets, home decor, and fashion essentials.</p>
+                    <button class="hero-slide-btn" onclick="loadCategory('deals')">
+                        <span>Explore Deals</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 2: Tech & Gaming -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop'), url('hero_image.jpg');">
+                <div class="hero-slide-content">
+                    <span class="hero-slide-badge"><i class="fa-solid fa-laptop"></i> Flagship Tech</span>
+                    <h1 class="hero-slide-title">Next-Gen Mobiles & Laptops</h1>
+                    <p class="hero-slide-desc">Power up with iPhone 15 Pro, Samsung S24 Ultra & M3 MacBooks with extra exchange discounts.</p>
+                    <button class="hero-slide-btn" onclick="loadCategory('smartphones')">
+                        <span>Shop Mobiles</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3: Fashion Festival -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600&auto=format&fit=crop'), url('hero_image.jpg');">
+                <div class="hero-slide-content">
+                    <span class="hero-slide-badge"><i class="fa-solid fa-shirt"></i> Fashion Festival</span>
+                    <h1 class="hero-slide-title">Upgrade Your Style Today</h1>
+                    <p class="hero-slide-desc">Top clothing brands, Nike sneakers, Ray-Ban sunglasses, and leather bags up to 60% off.</p>
+                    <button class="hero-slide-btn" onclick="loadCategory('fashion')">
+                        <span>Explore Fashion</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 4: Home & Kitchen -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1600&auto=format&fit=crop'), url('hero_image.jpg');">
+                <div class="hero-slide-content">
+                    <span class="hero-slide-badge"><i class="fa-solid fa-kitchen-set"></i> Kitchen & Living</span>
+                    <h1 class="hero-slide-title">Smart Home Makeover</h1>
+                    <p class="hero-slide-desc">Ninja blenders, Instant Pots, air fryers, ergonomic chairs, and modern cookware sets.</p>
+                    <button class="hero-slide-btn" onclick="loadCategory('home-kitchen')">
+                        <span>Shop Kitchen</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 5: Beauty & Fragrances -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop'), url('hero_image.jpg');">
+                <div class="hero-slide-content">
+                    <span class="hero-slide-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Luxury Scents</span>
+                    <h1 class="hero-slide-title">Iconic Perfumes & Skincare</h1>
+                    <p class="hero-slide-desc">Chanel Coco Noir, Dior Sauvage, MAC lipsticks, and CeraVe hydrating serums for radiant glow.</p>
+                    <button class="hero-slide-btn" onclick="loadCategory('fragrances')">
+                        <span>Shop Fragrances</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slider Indicator Dots -->
+        <div class="hero-slider-dots" id="hero-slider-dots">
+            <span class="hero-dot active" data-index="0"></span>
+            <span class="hero-dot" data-index="1"></span>
+            <span class="hero-dot" data-index="2"></span>
+            <span class="hero-dot" data-index="3"></span>
+            <span class="hero-dot" data-index="4"></span>
+        </div>
+
+        <!-- Overlaid Hero Message -->
         <div class="hero-msg">
             <p>You are on amazon.com. You can also shop on Amazon India for millions of products with fast
-                localdelivery. <a>Click here to go to amazon.in</a></p>
-        </div>
-
-    </div>
-    <div class="shop-section">
-        <div class="box">
-            <div class="box-content">
-                <h3>play toys & gaming</h3>
-                <div class="box-image" style="background-image: url('box1-image.jpg');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
-        <div class=" box">
-            <div class="box-content">
-                <h3>Laptop</h3>
-                <div class="box-image" style="background-image: url('laptop-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
-        <div class=" box">
-            <div class="box-content">
-                <h3>Keyboard</h3>
-                <div class="box-image" style="background-image: url('keyboard-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
-        <div class=" box">
-            <div class="box-content">
-                <h3>Bedroom & decoration</h3>
-                <div class="box-image" style="background-image: url('bedroom-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
+                local delivery. <a href="#" id="hero-switch-country">Click here to go to amazon.in</a></p>
         </div>
     </div>
-    <div class="shop-section">
-        <div class="box">
-            <div class="box-content">
-                <h3>Cooking</h3>
-                <div class="box-image" style="background-image: url('cook-image.webp');"></div>
-                <p>see more</p>
 
-            </div>
-        </div>
-        <div class="box">
-            <div class="box-content">
-                <h3>Bedroom</h3>
-                <div class="box-image" style="background-image: url('bed-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
-        <div class=" box">
-            <div class="box-content">
-                <h3>Kitchen</h3>
-                <div class="box-image" style="background-image: url('kitechen-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
-        <div class=" box">
-            <div class="box-content">
-                <h3>Fridge</h3>
-                <div class="box-image" style="background-image: url('fridge-image.webp');"></div>
-                <p>see more</p>
-
-            </div>
-        </div>
+    <!-- Filter / Results Header -->
+    <div class="results-header" id="results-header" style="display: none;">
+        <h2 id="results-title">Featured Products</h2>
+        <button id="reset-filter-btn" class="reset-btn"><i class="fa-solid fa-rotate-left"></i> View All</button>
     </div>
+
+    <!-- Dynamic Shop Section -->
+    <div class="shop-section" id="shop-section">
+        <!-- Products dynamically loaded from API by app.js -->
+    </div>
+
     <footer>
-        <div class="footer-panel1">
+        <div class="footer-panel1" id="back-to-top">
             Back to top
         </div>
         <div class="foot-panel2">
@@ -157,34 +318,30 @@
                 <a>Amazon Science</a>
             </ul>
             <ul>
-                <p>Get to Know Us</p>
-                <a>Careers</a>
-                <a>Blog</a>
-                <a>About Amazon</a>
-                <a>Investor Relations</a>
-                <a>Amazon Devices</a>
-                <a>Amazon Science</a>
-            </ul>
-
-            <ul>
-                <p>Get to Know Us</p>
-                <a>Careers</a>
-                <a>Blog</a>
-                <a>About Amazon</a>
-                <a>Investor Relations</a>
-                <a>Amazon Devices</a>
-                <a>Amazon Science</a>
+                <p>Make Money with Us</p>
+                <a>Sell products on Amazon</a>
+                <a>Sell on Amazon Business</a>
+                <a>Sell apps on Amazon</a>
+                <a>Become an Affiliate</a>
+                <a>Advertise Your Products</a>
+                <a>Self-Publish with Us</a>
             </ul>
             <ul>
-                <p>Get to Know Us</p>
-                <a>Careers</a>
-                <a>Blog</a>
-                <a>About Amazon</a>
-                <a>Investor Relations</a>
-                <a>Amazon Devices</a>
-                <a>Amazon Science</a>
+                <p>Amazon Payment Products</p>
+                <a>Amazon Business Card</a>
+                <a>Shop with Points</a>
+                <a>Reload Your Balance</a>
+                <a>Amazon Currency Converter</a>
             </ul>
-
+            <ul>
+                <p>Let Us Help You</p>
+                <a>Amazon and COVID-19</a>
+                <a>Your Account</a>
+                <a>Your Orders</a>
+                <a>Shipping Rates & Policies</a>
+                <a>Returns & Replacements</a>
+                <a>Help</a>
+            </ul>
         </div>
         <div class="foot-panel3">
             <div class="logo"> </div>
@@ -197,10 +354,130 @@
                 <a>Your Ads Privacy Choices</a>
             </div>
             <div class="copyright">
-                © 1996-2025, Amazon.com, Inc. or its affiliates
+                © 1996-2026, Amazon.com, Inc. or its affiliates
             </div>
         </div>
     </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="product-modal" style="display: none;">
+        <div class="modal-box">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Drawer / Modal -->
+    <div class="modal-overlay" id="cart-modal" style="display: none;">
+        <div class="cart-drawer">
+            <div class="cart-drawer-header">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Shopping Cart (<span id="cart-drawer-count">0</span>)</h3>
+                <button class="modal-close" id="cart-close-btn">&times;</button>
+            </div>
+            <div class="cart-drawer-items" id="cart-items-container"></div>
+            <div class="cart-drawer-footer">
+                <div class="cart-total-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="cart-subtotal-price">₹0</span>
+                </div>
+                <button class="btn-checkout" id="checkout-btn">Proceed to Buy</button>
+                <button class="btn-clear-cart" id="clear-cart-btn">Clear Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders History Modal -->
+    <div class="modal-overlay" id="orders-modal" style="display: none;">
+        <div class="modal-box orders-modal-box">
+            <button class="modal-close" id="orders-close-btn">&times;</button>
+            <div class="modal-content-wrapper">
+                <div class="orders-header">
+                    <h2><i class="fa-solid fa-box-open"></i> Your Orders</h2>
+                    <p>Track packages, review items, and view order history</p>
+                </div>
+                <div class="orders-list" id="orders-list-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal-overlay" id="wishlist-modal" style="display: none;">
+        <div class="modal-box wishlist-modal-box">
+            <button class="modal-close" id="wishlist-close-btn">&times;</button>
+            <div class="modal-content-wrapper">
+                <div class="orders-header">
+                    <h2><i class="fa-solid fa-heart" style="color: #e11d48;"></i> Your Wishlist</h2>
+                    <p>Items you saved to purchase later</p>
+                </div>
+                <div class="wishlist-list" id="wishlist-list-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Account / Settings Modal -->
+    <div class="modal-overlay" id="settings-modal" style="display: none;">
+        <div class="modal-box form-modal-box">
+            <button class="modal-close" id="settings-close-btn">&times;</button>
+            <div class="modal-content-wrapper">
+                <div class="form-modal-header">
+                    <h2><i class="fa-solid fa-gear"></i> Account Settings</h2>
+                    <p>Update your personal info and store preferences</p>
+                </div>
+                <form id="settings-form" class="account-form">
+                    <div class="form-group">
+                        <label for="settings-name-input">Full Name</label>
+                        <input type="text" id="settings-name-input" class="form-input" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-email-input">Email Address</label>
+                        <input type="email" id="settings-email-input" class="form-input" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="settings-phone-input">Phone Number (Optional)</label>
+                        <input type="tel" id="settings-phone-input" class="form-input" placeholder="+91 9876543210">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth / Sign In Modal -->
+    <div class="modal-overlay" id="auth-modal" style="display: none;">
+        <div class="modal-box form-modal-box">
+            <button class="modal-close" id="auth-close-btn">&times;</button>
+            <div class="modal-content-wrapper">
+                <div class="form-modal-header">
+                    <h2><i class="fa-solid fa-user-lock"></i> <span id="auth-modal-title">Sign In</span></h2>
+                    <p id="auth-modal-subtitle">Access your Amazon Clone account & orders</p>
+                </div>
+                <form id="auth-form" class="account-form">
+                    <div class="form-group">
+                        <label for="auth-name-input">Your Name</label>
+                        <input type="text" id="auth-name-input" class="form-input" required placeholder="e.g. Kavi Rawat">
+                    </div>
+                    <div class="form-group">
+                        <label for="auth-email-input">Email or Mobile Number</label>
+                        <input type="text" id="auth-email-input" class="form-input" required placeholder="user@amazon.clone">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="auth-submit-btn">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-msg">Item added to Cart</span>
+    </div>
+
+    <script src="products-data.js?v=6.0"></script>
+    <script src="app.js?v=6.0"></script>
 </body>
 
 </html>
